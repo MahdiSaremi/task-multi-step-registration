@@ -43,6 +43,12 @@ interface ApiClient
      */
     public function verify($id, string $method, array $data) : bool;
 
+    /**
+     * Upload a file
+     *
+     * @param UploadedFile $file
+     * @return string
+     */
     public function upload(UploadedFile $file) : string;
 
 }
