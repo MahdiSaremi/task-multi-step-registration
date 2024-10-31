@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Secondary\Test;
+namespace App\ServerApi\Test;
 
-use App\Secondary\Contracts\ApiClient;
+use App\Jobs\UpdateReTransferJob;
+use App\ServerApi\Contracts\ApiClient;
 use Illuminate\Support\Facades\Http;
 
 class TestApiClient implements ApiClient
@@ -23,6 +24,18 @@ class TestApiClient implements ApiClient
         $data['id'] = $id;
 
         return (bool) $this->request('update', $data);
+    }
+
+    public function forceUpdate($id, array $data) : void
+    {
+        try
+        {
+            $this->update($id, $data);
+        }
+        catch (\Throwable)
+        {
+            dispatch(new UpdateReTransferJob($id, $data))->delay(now()->addMinutes(30));
+        }
     }
 
     public function verify($id, string $method, array $data) : bool

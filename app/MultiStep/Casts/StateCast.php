@@ -2,7 +2,7 @@
 
 namespace App\MultiStep\Casts;
 
-use App\Secondary\Contracts\ApiClient;
+use App\ServerApi\Contracts\ApiClient;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 

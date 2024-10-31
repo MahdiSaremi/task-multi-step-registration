@@ -21,4 +21,14 @@ class RegistrationState extends Model
         'state' => StateCast::class,
     ];
 
+    public function nextState()
+    {
+        $this->state = $this->state->next();
+    }
+
+    public function prevState()
+    {
+        $this->state = $this->state->prev();
+    }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Secondary\Contracts;
+namespace App\ServerApi\Contracts;
 
 interface ApiClient
 {
@@ -21,6 +21,15 @@ interface ApiClient
      * @return bool
      */
     public function update($id, array $data) : bool;
+
+    /**
+     * Update the user and retry in a queue if failed
+     *
+     * @param       $id
+     * @param array $data
+     * @return void
+     */
+    public function forceUpdate($id, array $data) : void;
 
     /**
      * Verify the action

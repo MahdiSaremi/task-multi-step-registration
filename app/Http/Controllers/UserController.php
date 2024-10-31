@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RegistrationState;
-use App\MultiStep\FillEmailPhoneState;
-use App\Secondary\Contracts\ApiClient;
-use Illuminate\Http\Request;
+use App\ServerApi\Contracts\ApiClient;
 
 class UserController extends Controller
 {
@@ -14,12 +12,12 @@ class UserController extends Controller
     {
         if ($user = $api->getUser($id))
         {
-            $formState = new RegistrationState;
-            $formState->user_id = $id;
-            $formState->state = new FillEmailPhoneState($formState, $api);
-            $formState->save();
+            $state = new RegistrationState;
+            $state->user_id = $id;
+            $state->state = new FillEmailPhoneState($state, $api);
+            $state->save();
 
-            return to_route('show-form-state', ['formState' => $formState]);
+            return to_route('register-state', ['state' => $state]);
         }
         else
         {

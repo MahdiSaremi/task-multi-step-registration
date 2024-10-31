@@ -3,8 +3,9 @@
 namespace App\MultiStep\Contracts;
 
 use App\Models\RegistrationState;
-use App\Secondary\Contracts\ApiClient;
+use App\ServerApi\Contracts\ApiClient;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 interface State
 {
@@ -52,5 +53,12 @@ interface State
      * @return void
      */
     public function submit(Request $request) : void;
+
+    /**
+     * Get the step view
+     *
+     * @return View
+     */
+    public function getView() : View;
 
 }

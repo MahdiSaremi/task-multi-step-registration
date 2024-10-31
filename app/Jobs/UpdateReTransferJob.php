@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Secondary\Contracts\ApiClient;
+use App\ServerApi\Contracts\ApiClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 

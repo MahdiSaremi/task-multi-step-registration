@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Secondary\Contracts\ApiClient;
-use App\Secondary\Test\TestApiClient;
+use App\ServerApi\Contracts\ApiClient;
+use App\ServerApi\Test\TestApiClient;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
