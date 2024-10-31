@@ -2,10 +2,20 @@
 
 namespace App\MultiStep\Contracts;
 
+use App\Models\UserFormState;
 use App\Secondary\Contracts\SecondaryApi;
+use Illuminate\Http\Request;
 
 interface StepState
 {
+
+    /**
+     * Construct the state with context and api value
+     *
+     * @param UserFormState $context
+     * @param SecondaryApi  $api
+     */
+    public function __construct(UserFormState $context, SecondaryApi $api);
 
     /**
      * Go to the next state
@@ -36,12 +46,11 @@ interface StepState
     public function hasPrev() : bool;
 
     /**
-     * Submit the form with data
+     * Submit the form and update the data
      *
-     * @param array        $data
-     * @param SecondaryApi $api
+     * @param Request      $request
      * @return void
      */
-    public function submit(array $data, SecondaryApi $api) : void;
+    public function submit(Request $request) : void;
 
 }

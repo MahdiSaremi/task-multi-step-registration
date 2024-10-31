@@ -2,11 +2,20 @@
 
 namespace App\MultiStep;
 
+use App\Models\UserFormState;
 use App\MultiStep\Contracts\StepState;
 use App\MultiStep\Exceptions\NotMoreStateExists;
+use App\Secondary\Contracts\SecondaryApi;
 
 class FillPersonalState implements StepState
 {
+
+    public function __construct(
+        protected UserFormState $context,
+        protected SecondaryApi $api,
+    )
+    {
+    }
 
     public function next() : StepState
     {

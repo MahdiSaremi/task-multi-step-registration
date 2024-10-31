@@ -15,7 +15,12 @@ class TestApi implements SecondaryApi
 
     public function getUser($id) : array
     {
-        return $this->fetch('getUser', ['id' => $id]);
+        return $this->fetch('getUser', compact('id'));
+    }
+
+    public function updateEmailPhone(string $email, string $phone) : void
+    {
+        $this->fetch('updateEmailPhone', compact('email', 'phone'));
     }
 
 }
