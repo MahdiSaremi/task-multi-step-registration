@@ -7,6 +7,10 @@ interface SecondaryApi
 
     public function getUser($id) : array;
 
-    public function updateEmailPhone(string $email, string $phone) : void;
+    public function updateEmailPhone($id, string $email, string $phone) : void;
+
+    public function updatePassword($id, string $password) : void;
+
+    public function updatePersonalInfo($id, string $name, string $address) : void;
 
 }

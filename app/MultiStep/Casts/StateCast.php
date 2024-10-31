@@ -2,6 +2,7 @@
 
 namespace App\MultiStep\Casts;
 
+use App\Secondary\Contracts\SecondaryApi;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +16,7 @@ class StateCast implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes) : StateCast
     {
-        return new $value;
+        return new $value($model, app(SecondaryApi::class));
     }
 
     /**

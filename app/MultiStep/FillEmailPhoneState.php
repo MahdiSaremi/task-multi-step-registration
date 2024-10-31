@@ -20,7 +20,7 @@ class FillEmailPhoneState implements StepState
 
     public function next() : StepState
     {
-        return new FillPasswordState();
+        return new FillPasswordState($this->context, $this->api);
     }
 
     public function prev() : StepState
@@ -45,7 +45,7 @@ class FillEmailPhoneState implements StepState
             'phone' => ['required', 'string', 'regex:/^(+?98|0)?\d{11}$/'],
         ]);
 
-        $this->api->updateEmailPhone($data['email'], $data['phone']);
+        $this->api->updateEmailPhone($this->context->user_id, $data['email'], $data['phone']);
     }
 
 }

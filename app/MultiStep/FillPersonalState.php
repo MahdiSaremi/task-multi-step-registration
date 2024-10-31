@@ -6,6 +6,7 @@ use App\Models\UserFormState;
 use App\MultiStep\Contracts\StepState;
 use App\MultiStep\Exceptions\NotMoreStateExists;
 use App\Secondary\Contracts\SecondaryApi;
+use Illuminate\Http\Request;
 
 class FillPersonalState implements StepState
 {
@@ -24,7 +25,7 @@ class FillPersonalState implements StepState
 
     public function prev() : StepState
     {
-        return new FillPasswordState();
+        return new FillPasswordState($this->context, $this->api);
     }
 
     public function hasNext() : bool
@@ -35,6 +36,16 @@ class FillPersonalState implements StepState
     public function hasPrev() : bool
     {
         return true;
+    }
+
+    public function submit(Request $request) : void
+    {
+        $data = $request->validate([
+            'name' => 'required|string|min:2|max:50',
+            'address' => 'required|string|max:150',
+        ]);
+
+        $this->api->updatePersonalInfo($this->context->user_id, $data['name'], $data['address']);
     }
 
 }
