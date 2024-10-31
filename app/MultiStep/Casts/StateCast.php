@@ -2,6 +2,7 @@
 
 namespace App\MultiStep\Casts;
 
+use App\MultiStep\Contracts\State;
 use App\ServerApi\Contracts\ApiClient;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
@@ -12,9 +13,9 @@ class StateCast implements CastsAttributes
     /**
      * Convert the string class name of state to state object
      *
-     * @return StateCast
+     * @return State
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes) : StateCast
+    public function get(Model $model, string $key, mixed $value, array $attributes) : State
     {
         return new $value($model, app(ApiClient::class));
     }

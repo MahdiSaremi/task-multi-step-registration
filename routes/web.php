@@ -14,5 +14,7 @@ Route::controller(RegistrationStateController::class)
     ->group(function () {
 
         Route::get('/register/{state}', 'show')->name('register-state');
+        Route::post('/register/{state}/submit', 'submit')->name('register-state.submit');
+        Route::post('/register/{state}/prev', 'prev')->name('register-state.prev');
 
     });

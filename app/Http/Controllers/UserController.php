@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RegistrationState;
+use App\MultiStep\PersonalInfoState;
 use App\ServerApi\Contracts\ApiClient;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
         {
             $state = new RegistrationState;
             $state->user_id = $id;
-            $state->state = new FillEmailPhoneState($state, $api);
+            $state->state = new PersonalInfoState($state, $api);
             $state->save();
 
             return to_route('register-state', ['state' => $state]);

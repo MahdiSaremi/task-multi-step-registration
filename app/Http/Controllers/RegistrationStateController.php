@@ -12,4 +12,16 @@ class RegistrationStateController extends Controller
         return view('registration.index', compact('state'));
     }
 
+    public function submit(RegistrationState $state)
+    {
+        $state->state->submit(request());
+        return back();
+    }
+
+    public function prev(RegistrationState $state)
+    {
+        $state->state->prev();
+        return back();
+    }
+
 }

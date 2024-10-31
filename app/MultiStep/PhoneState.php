@@ -51,7 +51,7 @@ class PhoneState implements State
 
     public function getView() : View
     {
-        // TODO: Implement getView() method.
+        return view('registration.states.phone');
     }
 
 }
