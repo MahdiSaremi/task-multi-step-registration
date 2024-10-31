@@ -26,6 +26,7 @@ php artisan db:seed
 ```shell
 php artisan serve
 npm run dev
+php artisan queue:work
 ```
 
 پروژه دوم، سرور واسط است که اگر می خواهید حالت روشن آن را تست کنید، حتما با
