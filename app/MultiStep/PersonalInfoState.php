@@ -46,7 +46,7 @@ class PersonalInfoState implements State
             'age' => 'required|integer|min:5|max:200',
         ]);
 
-        $this->api->forceUpdate($this->context, $data);
+        $this->api->forceUpdate($this->context->user_id, $data);
 
         $this->context->nextState();
     }

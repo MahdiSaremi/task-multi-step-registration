@@ -41,7 +41,9 @@ class SubmitState implements State
 
     public function submit(Request $request) : void
     {
-        // TODO: Implement submit() method.
+        $request->validate([
+            'confirm' => 'required|accepted',
+        ]);
     }
 
     public function getView() : View

@@ -40,7 +40,13 @@ class PhoneState implements State
 
     public function submit(Request $request) : void
     {
-        // TODO: Implement submit() method.
+        $data = $request->validate([
+            'phone' => ['nullable', 'string', 'regex:/^(+?98|0)?\d{11}$/'],
+        ]);
+
+        $this->api->forceUpdate($this->context->user_id, $data);
+
+        $this->context->nextState();
     }
 
     public function getView() : View

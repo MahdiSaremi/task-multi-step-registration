@@ -4,6 +4,7 @@ namespace App\ServerApi\Test;
 
 use App\Jobs\UpdateReTransferJob;
 use App\ServerApi\Contracts\ApiClient;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
 
 class TestApiClient implements ApiClient
@@ -11,8 +12,17 @@ class TestApiClient implements ApiClient
 
     protected function request(string $uri, array $params)
     {
-        return Http::post("http://localhost:8001/$uri", $params)->throw()->json();
+        return Http::post("http://localhost:8001/$uri", $params)
+            ->throw()->json();
     }
+
+    public function upload(UploadedFile $file) : string
+    {
+        return Http::attach('file', $file->getContent(), $file->getPath())
+            ->post("http://localhost:8001/upload")
+            ->throw()->json();
+    }
+
 
     public function getUser($id) : ?array
     {

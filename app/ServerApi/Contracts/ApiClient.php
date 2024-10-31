@@ -2,6 +2,8 @@
 
 namespace App\ServerApi\Contracts;
 
+use Illuminate\Http\UploadedFile;
+
 interface ApiClient
 {
 
@@ -40,5 +42,7 @@ interface ApiClient
      * @return bool
      */
     public function verify($id, string $method, array $data) : bool;
+
+    public function upload(UploadedFile $file) : string;
 
 }

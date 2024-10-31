@@ -40,7 +40,17 @@ class AvatarState implements State
 
     public function submit(Request $request) : void
     {
-        // TODO: Implement submit() method.
+        $request->validate([
+            'image' => 'required|image',
+        ]);
+
+        $uuid = $this->api->upload(
+            $request->file('image')
+        );
+
+        $this->api->forceUpdate($this->context->user_id, ['image' => $uuid]);
+
+        $this->context->nextState();
     }
 
     public function getView() : View
