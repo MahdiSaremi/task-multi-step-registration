@@ -13,4 +13,6 @@ interface SecondaryApi
 
     public function updatePersonalInfo($id, string $name, string $address) : void;
 
+    public function finish($id) : void;
+
 }

@@ -32,5 +32,10 @@ class TestApi implements SecondaryApi
     {
         $this->fetch('updatePersonalInfo', compact('id', 'name', 'address'));
     }
-    
+
+    public function finish($id) : void
+    {
+        $this->fetch('finish', compact('id'));
+    }
+
 }
