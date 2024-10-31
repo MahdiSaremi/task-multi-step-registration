@@ -10,20 +10,19 @@ class TestApiClient implements ApiClient
 
     protected function request(string $uri, array $params)
     {
-        return Http::post("http://localhost:8001/$uri", $params);
+        return Http::post("http://localhost:8001/$uri", $params)->throw()->json();
     }
 
     public function getUser($id) : ?array
     {
-        return $this->request('getUser', compact('id'))->json();
+        return $this->request('getUser', compact('id'));
     }
 
-    public function update($id, array $data) : void
+    public function update($id, array $data) : bool
     {
         $data['id'] = $id;
 
-        $result = $this->request('update', $data);
-        // todo
+        return (bool) $this->request('update', $data);
     }
 
     public function verify($id, string $method, array $data) : bool
@@ -31,7 +30,7 @@ class TestApiClient implements ApiClient
         $data['id'] = $id;
         $data['method'] = $method;
 
-        return (bool) $this->request('verify', $data)->json();
+        return (bool) $this->request('verify', $data);
     }
 
 }
