@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserFormController;
+use App\Http\Controllers\RegistrationStateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,9 +10,9 @@ Route::get('/', function () {
 
 Route::get('/user/{user}', UserController::class);
 
-Route::controller(UserFormController::class)
+Route::controller(RegistrationStateController::class)
     ->group(function () {
 
-        Route::get('/form/{formState}', 'showFormState');
+        Route::get('/register/{state}', 'show')->name('register-state');
 
     });

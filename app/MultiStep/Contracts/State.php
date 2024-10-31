@@ -2,34 +2,34 @@
 
 namespace App\MultiStep\Contracts;
 
-use App\Models\UserFormState;
-use App\Secondary\Contracts\SecondaryApi;
+use App\Models\RegistrationState;
+use App\Secondary\Contracts\ApiClient;
 use Illuminate\Http\Request;
 
-interface StepState
+interface State
 {
 
     /**
      * Construct the state with context and api value
      *
-     * @param UserFormState $context
-     * @param SecondaryApi  $api
+     * @param RegistrationState $context
+     * @param ApiClient         $api
      */
-    public function __construct(UserFormState $context, SecondaryApi $api);
+    public function __construct(RegistrationState $context, ApiClient $api);
 
     /**
      * Go to the next state
      *
-     * @return StepState
+     * @return State
      */
-    public function next() : StepState;
+    public function next() : State;
 
     /**
      * Go to the previous state
      *
-     * @return StepState
+     * @return State
      */
-    public function prev() : StepState;
+    public function prev() : State;
 
     /**
      * Checks the state has next state

@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use App\MultiStep\Casts\StateCast;
+use App\MultiStep\Contracts\State;
 use Illuminate\Database\Eloquent\Model;
 
-class UserFormState extends Model
+/**
+ * @property State $state
+ */
+class RegistrationState extends Model
 {
 
     protected $fillable = [
