@@ -13,29 +13,29 @@ class TestApi implements SecondaryApi
         return Http::post("http://localhost:8001/$uri", $params)->json();
     }
 
-    public function getUser($id) : array
+    public function getUser($id) : ?array
     {
         return $this->fetch('getUser', compact('id'));
     }
 
-    public function updateEmailPhone($id, string $email, string $phone) : void
+    public function updateEmailPhone($id, string $email, string $phone) : bool
     {
-        $this->fetch('updateEmailPhone', compact('id', 'email', 'phone'));
+        return (bool) $this->fetch('updateEmailPhone', compact('id', 'email', 'phone'));
     }
 
-    public function updatePassword($id, string $password) : void
+    public function updatePassword($id, string $password) : bool
     {
-        $this->fetch('updatePassword', compact('id', 'password'));
+        return (bool) $this->fetch('updatePassword', compact('id', 'password'));
     }
 
-    public function updatePersonalInfo($id, string $name, string $address) : void
+    public function updatePersonalInfo($id, string $name, string $address) : bool
     {
-        $this->fetch('updatePersonalInfo', compact('id', 'name', 'address'));
+        return (bool) $this->fetch('updatePersonalInfo', compact('id', 'name', 'address'));
     }
 
-    public function finish($id) : void
+    public function finish($id) : bool
     {
-        $this->fetch('finish', compact('id'));
+        return (bool) $this->fetch('finish', compact('id'));
     }
 
 }
