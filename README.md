@@ -35,6 +35,16 @@ php artisan queue:work
 php artisan serve --port=8001
 ```
 
+اکنون با باز کردن لینک
+
+http://localhost:8000/
+
+یا
+
+http://localhost:8000/user/1
+
+می توانید وارد بخش ثبت نام مرحله ای کاربر شوید.
+
 
 ## توضیحات
 
