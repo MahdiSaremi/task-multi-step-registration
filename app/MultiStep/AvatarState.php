@@ -5,7 +5,9 @@ namespace App\MultiStep;
 use App\Models\RegistrationState;
 use App\MultiStep\Contracts\State;
 use App\ServerApi\Contracts\ApiClient;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AvatarState implements State
@@ -44,9 +46,18 @@ class AvatarState implements State
             'image' => 'required|image',
         ]);
 
-        $uuid = $this->api->upload(
-            $request->file('image')
-        );
+        try
+        {
+            $uuid = $this->api->upload(
+                $request->file('image')
+            );
+        }
+        catch (ConnectionException)
+        {
+            throw ValidationException::withMessages([
+                'image' => "Failed to connect third party server",
+            ]);
+        }
 
         $this->api->forceUpdate($this->context->user_id, ['image' => $uuid]);
 

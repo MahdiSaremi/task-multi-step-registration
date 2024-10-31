@@ -11,19 +11,26 @@
 </head>
 <body class="bg-gray-100">
 
-<form method="POST" action="{{ route('register-state.submit', $state) }}" class="bg-white m-8 rounded-xl border border-gray-200 shadow-xl">
+<form enctype="multipart/form-data" method="POST" action="{{ route('register-state.submit', $state) }}" class="bg-white m-8 rounded-xl border border-gray-200 shadow-xl">
     {!! $state->state->getView()->with('state', $state)->render() !!}
 
     <div class="p-8 space-x-8">
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        @if($state->state->hasNext())
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        @endif
 
         @if($state->state->hasPrev())
-            <form action="{{ route('register-state.prev', $state) }}">
-                @csrf
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Previous</button>
-            </form>
+            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onclick="event.preventDefault(); document.getElementById('previous').submit()"
+            >
+                Previous
+            </button>
         @endif
     </div>
+</form>
+
+<form method="POST" action="{{ route('register-state.prev', $state) }}" id="previous">
+@csrf
 </form>
 
 </body>

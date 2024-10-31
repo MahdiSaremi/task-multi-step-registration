@@ -41,7 +41,7 @@ class PhoneState implements State
     public function submit(Request $request) : void
     {
         $data = $request->validate([
-            'phone' => ['nullable', 'string', 'regex:/^(+?98|0)?\d{11}$/'],
+            'phone' => ['nullable', 'string', 'regex:/^(\+?98|0)?\d{11}$/'],
         ]);
 
         $this->api->forceUpdate($this->context->user_id, $data);

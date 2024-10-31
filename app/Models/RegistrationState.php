@@ -24,11 +24,13 @@ class RegistrationState extends Model
     public function nextState()
     {
         $this->state = $this->state->next();
+        $this->save();
     }
 
     public function prevState()
     {
         $this->state = $this->state->prev();
+        $this->save();
     }
 
 }

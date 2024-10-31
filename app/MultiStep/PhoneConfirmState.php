@@ -5,6 +5,7 @@ namespace App\MultiStep;
 use App\Models\RegistrationState;
 use App\MultiStep\Contracts\State;
 use App\ServerApi\Contracts\ApiClient;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -45,10 +46,19 @@ class PhoneConfirmState implements State
             'code' => ['nullable', 'string'],
         ]);
 
-        if (!$this->api->verify($this->context->user_id, 'confirmPhone', $data))
+        try
+        {
+            if (!$this->api->verify($this->context->user_id, 'confirmPhone', $data))
+            {
+                throw ValidationException::withMessages([
+                    'code' => "Invalid code",
+                ]);
+            }
+        }
+        catch (ConnectionException)
         {
             throw ValidationException::withMessages([
-                'code' => "Invalid code",
+                'code' => "Failed to connect third party server",
             ]);
         }
 

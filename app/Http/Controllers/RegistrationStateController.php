@@ -20,7 +20,7 @@ class RegistrationStateController extends Controller
 
     public function prev(RegistrationState $state)
     {
-        $state->state->prev();
+        $state->prevState();
         return back();
     }
 

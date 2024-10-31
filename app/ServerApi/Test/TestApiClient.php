@@ -44,7 +44,7 @@ class TestApiClient implements ApiClient
         }
         catch (\Throwable)
         {
-            dispatch(new UpdateReTransferJob($id, $data))->delay(now()->addMinutes(30));
+            dispatch(new UpdateReTransferJob($id, $data))->delay(now()->addSecond());
         }
     }
 
