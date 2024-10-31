@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class UserFormController extends Controller
 {
 
-    public function step(UserFormState $state)
+    public function showFormState(UserFormState $formState)
     {
-
+        $user =
     }
 
 }
